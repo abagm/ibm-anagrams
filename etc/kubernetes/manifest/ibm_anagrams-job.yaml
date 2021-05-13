@@ -19,5 +19,19 @@ spec:
           command:
             - sh
             - '-c'
-            - 'set -x; cd /downloads; rm -f ${FILENAME};
+            - 'set -x; cd /downloads; rm -f ${FILENAME}; wget ${URL}/${FILENAME}'
+          env:
+            -
+              name: FILENAME
+              valuefrom:
+                secretKeyRef:
+                  key: filename
+                  name: ibm-anagrams-secret
+            -
+              name: URL
+              valuefrom:
+                secretKeyRef:
+                  key: url
+                  name: ibm-anagrams-secret
+          image: busybox
           
